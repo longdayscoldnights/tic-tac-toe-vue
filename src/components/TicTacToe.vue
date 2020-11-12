@@ -2,7 +2,7 @@
   <div class="board">
     <div v-for="(n, i) in 3" :key="n">
       <div v-for="(n, j) in 3" :key="j">
-        <square :value="board[i][j]"></square>
+        <square @click="move(i, j)" :value="board[i][j]"></square>
       </div>
     </div>
   </div>
@@ -22,6 +22,16 @@ export default {
         ["", "", ""]
       ]
     };
+  },
+  methods: {
+    move(x, y) {
+      // invalid move if the field is already filled
+      if (this.board[x][y] !== "") {
+        return;
+      }
+      this.board[x][y] = "x";
+      this.$forceUpdate();
+    }
   }
 };
 </script>
